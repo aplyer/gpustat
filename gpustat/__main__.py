@@ -2,6 +2,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import time 
+import os
 import sys
 
 from gpustat import __version__
@@ -65,8 +67,11 @@ def main(*argv):
     parser.add_argument('-v', '--version', action='version',
                         version=('gpustat %s' % __version__))
     args = parser.parse_args(argv[1:])
-
-    print_gpustat(**vars(args))
+    
+    while True:
+        sys.stdout.write("\x1b[2J\x1b[H")
+        print_gpustat(**vars(args))
+        time.sleep(1)
 
 
 if __name__ == '__main__':
